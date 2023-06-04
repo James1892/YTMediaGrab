@@ -4,8 +4,20 @@ from pytube import YouTube, Playlist
 from rich import print
 import os
 
+
+
 def downloadPlaylist(mainMenu):
     ScreenCleaner.clearScreen()
+
+    print("""
+▀██▀▀█▄  ▀██                    ▀██   ██           ▄   
+ ██   ██  ██   ▄▄▄▄    ▄▄▄▄ ▄▄▄  ██  ▄▄▄   ▄▄▄▄  ▄██▄  
+ ██▄▄▄█▀  ██  ▀▀ ▄██    ▀█▄  █   ██   ██  ██▄ ▀   ██   
+ ██       ██  ▄█▀ ██     ▀█▄█    ██   ██  ▄ ▀█▄▄  ██   
+▄██▄     ▄██▄ ▀█▄▄▀█▀     ▀█    ▄██▄ ▄██▄ █▀▄▄█▀  ▀█▄▀ 
+                       ▄▄ █                            
+                        ▀▀                             
+          """)
     while True:
         try:
             # Get the URL of the playlist
@@ -14,21 +26,26 @@ def downloadPlaylist(mainMenu):
             playlist = Playlist(playListUrl)
             # Get URLs of the videos in the playlist
             videoUrls = playlist.video_urls
-            if playListUrl != playlist:
+
+            # Check if the entered URL is a playlist
+            if not videoUrls:
                 while True:
-                    print(f"[bold red]Invlaid: url was not a playlist would you like to try again? (y/n) [/bold red]")
+                    print("[bold red]Invalid: URL is not a playlist. Would you like to try again? (y/n)[/bold red]")
                     tryAgain = input(">> ")
                     if tryAgain.lower() == 'y':
-                        downloadPlaylist(mainMenu)
+                        # Retry by restarting the loop
+                        break
                     elif tryAgain.lower() == 'n':
                         mainMenu()
-                        break
+                        return  # Exit the function
                     else:
-                        print(f"[bold red]Invalid option[/bold red]")
+                        print("[bold red]Invalid option[/bold red]")
+                continue  # Restart the loop if URL is not a playlist
 
             break
-        except:
-            print(f"[bold red] url is not a playlist[/bold red]")
+        except Exception:
+            print(f"[bold red]Invalid url[/bold red]")
+            # Handle the exception and allow the user to try again
 
     while True:
         print("\nChoose a format")
@@ -45,8 +62,9 @@ def downloadPlaylist(mainMenu):
             print("[bold red]Invalid option[/bold red]")
 
 
+
 def audioFormat(urls, mainMenu):
-    location = input(f"Save to directory [Default: {DefaultLocation.getDefaultSaveLocation()}]: ")
+    location = input(f"Save to directory [Default: {DefaultLocation.getDefaultSaveLocation()}]\n>> ")
 
     while True:
         if location == "":
@@ -54,7 +72,7 @@ def audioFormat(urls, mainMenu):
         
         if not os.path.exists(location):
             print(f"[bold red]{location} does not exist[/bold red]\n")
-            location = input("Enter a valid directory path:\n>> ")
+            location = input("Enter a valid directory path\n>> ")
             continue
         else:
             break
@@ -86,7 +104,7 @@ def audioFormat(urls, mainMenu):
                     break
                 elif choice == "2":
                     while True:
-                        newFileName = input("Enter a new name for the file: ")
+                        newFileName = input("Enter a new name for the file\n>> ")
                         newFile = os.path.join(location, newFileName + ".mp3")
                         if not os.path.exists(newFile):
                             os.rename(saveFile, newFile)  # Rename the file
