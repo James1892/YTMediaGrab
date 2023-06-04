@@ -6,18 +6,19 @@ YTMediaGrab is a Python-based application that allows you to effortlessly downlo
 ## Screenshots
 
 ### Main Screen
+![mainMenu](https://github.com/James1892/YTMediaGrab/assets/26960992/4b58752e-7f1f-4712-8d5d-bc3b545b0fd8)
 
 ### Audio Download
-
+![AudioDownload](https://github.com/James1892/YTMediaGrab/assets/26960992/57ea8331-e81d-4e6a-9b38-b1a26e003178)
 
 ### Video Download
-
+![VideoDownload](https://github.com/James1892/YTMediaGrab/assets/26960992/2f430eee-d302-41fe-80cc-713058ea6dc0)
 
 ### Batch Download
-
+![BatchDownload](https://github.com/James1892/YTMediaGrab/assets/26960992/19472296-b635-4985-a21c-d1999a8558f1)
 
 ### Configuration
-
+![setDefaultSaveLocation](https://github.com/James1892/YTMediaGrab/assets/26960992/278c4aee-9f6f-47a5-b880-aabb2b41b45b)
 
 ## Installation
 To use YTMediaGrab, follow these steps:
