@@ -50,4 +50,5 @@ python YTMediaGrab.py
 YTMediaGrab has the following requirements:
 
 - Python 3.6+
+- FFmpeg
 - Dependencies (can be installed using the provided setup.py file)
