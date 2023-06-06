@@ -2,7 +2,13 @@ from defaultLocation import DefaultLocation
 from clearScreen import ScreenCleaner
 from pytube import YouTube
 from rich import print
+import subprocess
 import os
+
+
+def convertToMp3(input_file, output_file):
+    subprocess.run(['ffmpeg', '-i', input_file, '-vn', '-acodec', 'libmp3lame', '-y', '-loglevel', 'error', output_file])
+
 
 
 def downloadMultiple(mainMenu):
@@ -44,7 +50,7 @@ def downloadMultiple(mainMenu):
 
 def downloadMultipleAudio(urls, mainMenu):
     location = input(f"Save to directory [Default: {DefaultLocation.getDefaultSaveLocation()}]\n>> ")
-    
+
     while True:
         if location == "":
             location = DefaultLocation.getDefaultSaveLocation()
@@ -54,7 +60,7 @@ def downloadMultipleAudio(urls, mainMenu):
             continue
         else:
             break
-    
+
     for url in urls:
         try:
             video = YouTube(url)
@@ -65,34 +71,36 @@ def downloadMultipleAudio(urls, mainMenu):
             continue
 
         while True:
-            saveFile = audio.download(output_path=location)
+            saveFile = audio.download(output_path=location)  # Get the location then download the audio
             base, ext = os.path.splitext(saveFile)
-            newFile = f"{base}.mp3"
+            convertedFile = base + ".mp3"  # Convert the file with the same base name and ".mp3" extension
 
-            if os.path.exists(newFile):
+            # Handling file already exists error
+            if os.path.exists(convertedFile):
                 print("[bold yellow]A file with the same name already exists. What do you want to do?[/bold yellow]")
+
                 print("1) Replace the existing file")
                 print("2) Rename the file")
                 choice = input(">> ")
-                
                 if choice == "1":
-                    os.remove(newFile)  # Delete the existing file
-                    os.rename(saveFile, newFile)  # Rename the file
+                    os.remove(convertedFile)  # Delete the existing file
+                    convertToMp3(saveFile, convertedFile)  # Convert and replace
                     print(f"[bold green]{video.title} replaced successfully[/bold green]\n")
                     break
                 elif choice == "2":
                     while True:
                         newFileName = input("Enter a new name for the file: ")
-                        newFile = os.path.join(location, newFileName + ".mp3")
-                        if not os.path.exists(newFile):
-                            os.rename(saveFile, newFile)  # Rename the file
+                        convertedFile = os.path.join(location, newFileName + ".mp3")
+                        if not os.path.exists(convertedFile):
+                            convertToMp3(saveFile, convertedFile)  # Convert and rename
                             print(f"[bold green]{video.title} renamed successfully to {newFileName}[/bold green]\n")
                             break
                     break
                 else:
                     print("[bold red]Invalid choice[/bold red]\n")
             else:
-                os.rename(saveFile, newFile)
+                convertToMp3(saveFile, convertedFile)  # Convert and save
+                os.remove(saveFile)  # Remove the original MP4 file
                 print(f"[bold green]{video.title} saved successfully[/bold green]\n")
                 break
 
@@ -102,7 +110,7 @@ def downloadMultipleAudio(urls, mainMenu):
 
 def downloadMultipleVideos(urls, mainMenu):
     location = input(f"Save to directory [Default: {DefaultLocation.getDefaultSaveLocation()}]\n>> ")
-    
+
     while True:
         if location == "":
             location = DefaultLocation.getDefaultSaveLocation()
@@ -112,47 +120,41 @@ def downloadMultipleVideos(urls, mainMenu):
             continue
         else:
             break
-    
+
     for url in urls:
         try:
             video = YouTube(url)
             print(f"[italic orange3]{video.title} [/italic orange3]")
-            download = video.streams.get_highest_resolution()
+            stream = video.streams.get_highest_resolution()
         except:
             print(f"[bold red]{url} does not exist[/bold red]\n")
             continue
 
-        while True:
-            saveFile = download.download(output_path=location)
-            base, ext = os.path.splitext(saveFile)
-            newFile = f"{base}.mov"
+        fileName = video.title + ".mp4"
+        filePath = os.path.join(location, fileName)
 
-            if os.path.exists(newFile):
-                print("[bold yellow]A file with the same name already exists. What do you want to do?[/bold yellow]")
+        if os.path.exists(filePath):
+            print("[bold yellow]A file with the same name already exists. What do you want to do?[/bold yellow]")
+            print("1) Replace the existing file")
+            print("2) Rename the file")
+            choice = input(">> ")
 
-                print("1) Replace the existing file")
-                print("2) Rename the file")
-                choice = input(">> ")
-                if choice == "1":
-                    os.remove(newFile)  # Delete the existing file
-                    os.rename(saveFile, newFile)  # Rename the file
-                    print(f"[bold green]{video.title} replaced successfully[/bold green]\n")
-                    break
-                elif choice == "2":
-                    while True:
-                        newFileName = input("Enter a new name for the file: ")
-                        newFile = os.path.join(location, newFileName + ".mov")
-                        if not os.path.exists(newFile):
-                            os.rename(saveFile, newFile)  # Rename the file
-                            print(f"[bold green]{video.title} renamed successfully to {newFileName}[/bold green]\n")
-                            break
-                    break
-                else:
-                    print("[bold red]Invalid input[/bold red]\n")
+            if choice == "1":
+                os.remove(filePath)  # Delete the existing file
+                print(f"[bold green]{video.title} replaced successfully[/bold green]\n")
+            elif choice == "2":
+                while True:
+                    newfileName = input("Enter a new name for the file: ")
+                    newfilePath = os.path.join(location, new_fileName + ".mp4")
+                    if not os.path.exists(newfilePath):
+                        filePath = newfile_path
+                        print(f"[bold green]{video.title} renamed successfully to {newfileName}[/bold green]\n")
+                        break
             else:
-                os.rename(saveFile, newFile)
-                print(f"[bold green]{video.title} saved successfully[/bold green]\n")
-                break
+                print("[bold red]Invalid input[/bold red]\n")
+
+        stream.download(output_path=location, filename=fileName)
+        print(f"[bold green]{video.title} saved successfully[/bold green]\n")
 
     input("Press Enter to continue...")
     mainMenu()

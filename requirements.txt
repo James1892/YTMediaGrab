@@ -1,0 +1,4 @@
+subprocess
+python-ffmpeg
+pytube
+rich
