@@ -7,7 +7,7 @@ import os
 
 
 def convertToMp3(input_file, output_file):
-    subprocess.run(['ffmpeg', '-i', input_file, '-vn', '-acodec', 'libmp3lame', '-y', '-loglevel', 'error', output_file])
+    subprocess.run(["ffmpeg", "-i", input_file, "-vn", "-acodec", "libmp3lame", "-y", "-loglevel", "error", output_file])
 
 
 
@@ -25,7 +25,7 @@ def downloadMultiple(mainMenu):
           [/cyan]""")
     urls = []
     while True:
-        url = input("Enter URL of the file you want to download (or 'done' to finish):\n>> ")
+        url = input("Enter URL of the file you want to download (or \"done\" to finish):\n>> ")
         if url.lower() == "done":
             break
         urls.append(url)

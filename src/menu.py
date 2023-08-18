@@ -1,4 +1,4 @@
-from multiple import downloadMultiple, downloadMultipleAudio, downloadMultipleVideos
+from multiple import downloadMultiple
 from playlist import downloadPlaylist 
 from defaultLocation import DefaultLocation
 from clearScreen import ScreenCleaner
@@ -34,7 +34,7 @@ def mainMenu():
 
         option = input(">> ")
         if option == "1":
-            audioDownload(mainMenu)  # Pass mainMenu function as an argument
+            audioDownload(mainMenu)
         elif option == "2":
             videoDownload(mainMenu)
         elif option == "3":

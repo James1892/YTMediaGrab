@@ -6,7 +6,7 @@ import subprocess
 import os
 
 def convertToMp3(input_file, output_file):
-    subprocess.run(['ffmpeg', '-i', input_file, '-vn', '-acodec', 'libmp3lame', '-y', '-loglevel', 'error', output_file])
+    subprocess.run(["ffmpeg", "-i", input_file, "-vn", "-acodec", "libmp3lame", "-y", "-loglevel", "error", output_file])
 
 def audioDownload(mainMenu):
     ScreenCleaner.clearScreen()
