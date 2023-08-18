@@ -6,19 +6,33 @@ YTMediaGrab is a Python-based application that allows you to effortlessly downlo
 ## Screenshots
 
 ### Main Screen
-![mainMenu](https://github.com/James1892/YTMediaGrab/assets/26960992/4b58752e-7f1f-4712-8d5d-bc3b545b0fd8)
+<img width="900" alt="MainMenu" src="https://github.com/James1892/YTMediaGrab/assets/26960992/6174c0b8-6530-483f-98ce-1e984d0617cb">
+
+
 
 ### Audio Download
-![AudioDownload](https://github.com/James1892/YTMediaGrab/assets/26960992/57ea8331-e81d-4e6a-9b38-b1a26e003178)
+<img width="900" alt="Audio" src="https://github.com/James1892/YTMediaGrab/assets/26960992/f2e09ca0-d078-4ea4-8410-3a9312aa7e15">
+
+
 
 ### Video Download
-![VideoDownload](https://github.com/James1892/YTMediaGrab/assets/26960992/2f430eee-d302-41fe-80cc-713058ea6dc0)
+<img width="900" alt="Video" src="https://github.com/James1892/YTMediaGrab/assets/26960992/f64bb312-9183-4023-aae4-8774a342bbe2">
+
+
 
 ### Batch Download
-![BatchDownload](https://github.com/James1892/YTMediaGrab/assets/26960992/19472296-b635-4985-a21c-d1999a8558f1)
+<img width="1187" alt="Multi" src="https://github.com/James1892/YTMediaGrab/assets/26960992/67d71524-aa88-41b2-a539-cac89c4e3cba">
+
+
+
+### PlayList Download
+
+<img width="888" alt="playlist" src="https://github.com/James1892/YTMediaGrab/assets/26960992/3df3161c-f8b1-4ae5-be6f-e15ad9a0dc1e">
+
 
 ### Configuration
-![setDefaultSaveLocation](https://github.com/James1892/YTMediaGrab/assets/26960992/278c4aee-9f6f-47a5-b880-aabb2b41b45b)
+<img width="900" alt="DefaultSaveLocation" src="https://github.com/James1892/YTMediaGrab/assets/26960992/ef8e0717-1701-41fc-81e4-04034a8b86ff">
+
 
 ## Installation
 To use YTMediaGrab, follow these steps:
